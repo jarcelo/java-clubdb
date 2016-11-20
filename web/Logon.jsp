@@ -15,7 +15,7 @@
                 <tr>
                     <td>User ID:</td>
                     <td><input type="text" name="userid" id="userid"
-                               value="${empty m.memid ? cookie.userid.value: m.memid}">
+                               value="${empty m.memid ? cookie.userid.value : m.memid}">
                     </td>
                 </tr>
                 <tr>
