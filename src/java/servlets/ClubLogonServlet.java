@@ -79,15 +79,13 @@ public class ClubLogonServlet extends HttpServlet
         } catch(SQLException e) {
             msg = "SQL Exception: " + e.getMessage() + "<br>";
         }
-        catch (Exception e) {
-        }
+        request.setAttribute("msg", msg);
         // Add cookie for userID
         Cookie uid = new Cookie("userid", userid);
         uid.setMaxAge(60*10);
         uid.setPath("/");
         response.addCookie(uid);
         
-        request.setAttribute("msg", msg);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(URL);
         dispatcher.forward(request, response);
     }
