@@ -74,7 +74,7 @@
                     <table>
                         <tr>
                             <td>Month:</td><td><input type="text" name="month" 
-                                                      id="month" value="$(m.)"></td>
+                                                      id="month" value=""></td>
                             <td>Day:</td><td><input type="text" name="day" 
                                                     id="day" value=""></td>
                             <td>Year:</td><td><input type="text" name="year" 
@@ -85,6 +85,11 @@
                 </form> <br>
              <br><br>
              <a href="/ClubDB_Arcelo">Back to the Login Screen</a>
+             
+             <div>
+                 ${msg}
+             </div>
+             
            </body>
        </c:if>
 </html>
