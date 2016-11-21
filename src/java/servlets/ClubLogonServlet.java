@@ -21,16 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ClubLogonServlet extends HttpServlet
 {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
@@ -42,7 +32,6 @@ public class ClubLogonServlet extends HttpServlet
         Member member;
         
         String dbURL = "jdbc:mysql://localhost:3306/club";
-        
         String dbUser = "root";
         String dbPwd = "uftbutefade1";
         
@@ -66,18 +55,18 @@ public class ClubLogonServlet extends HttpServlet
                     member.setStatus(resultSet.getString("status"));
                     member.setMemdt(resultSet.getString("MemDt"));
                     URL = "/MemberScreen.jsp";
-                    msg = "Member Authenticated! <br>";
+                    msg = "Member successfully authenticated! <br>";
                 } else {
-                    msg = "Member found but not authenticated. <br>";
+                    msg = "Login failure. Member cannot be authenticated. <br>";
                 }
                 request.getSession().setAttribute("m", member);
             } else {
-                msg = "Userid not found.<br>";
+                msg = "Login failure. Userid not found.<br>";
             }
         } catch(NumberFormatException e) {
-            msg = "Illegal password<br>";
+            msg = "Login failure. Please enter correct information.<br>";
         } catch(SQLException e) {
-            msg = "SQL Exception: " + e.getMessage() + "<br>";
+            msg += "SQL Exception: " + e.getMessage() + "<br>";
         }
         request.setAttribute("msg", msg);
         // Add cookie for userID

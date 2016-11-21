@@ -7,6 +7,7 @@
         <title>Member Welcome</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+         <script src="https://use.fontawesome.com/ea6070bed7.js"></script>
         <style>
             table.member-details{
                 border-collapse: collapse;
@@ -26,7 +27,7 @@
         <body class="container">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3><span class="glyphicon glyphicon-user"></span>&nbsp;Club Member Data</h1>
+                    <h3 class="text-center">&nbsp;Club Member Data</h1>
                 </div>
                 <br>
                 <br>
@@ -82,63 +83,23 @@
                                            value="${m.password}">
                                 </div>
                             </div>
+                                <br>
                             <div class="form-group">
                                 <div class="col-sm-offset-4 col-sm-6">
                                   <button type="submit" class="btn btn-primary">Update Member Data</button>
                                 </div>
                             </div>
-                            <!--
-                            <table class="member-details">
-                            <tr>
-                                <td>Member ID:</td>
-                                <td><input type="text" id="memid" name="memid"
-                                           value="${m.memid}" readonly="true"></td>
-                            </tr>
-                            <tr>
-                                <td>Last Name:</td>
-                                <td><input type="text" id="lastname" name="lastname" 
-                                           value="${m.lastnm}" ></td>
-                            </tr>
-                            <tr>
-                                <td>First Name:</td>
-                                <td><input type="text" id="firstname" name="firstname" 
-                                           value="${m.firstnm}" ></td>
-                            </tr>
-                            <tr>
-                                <td>Middle Nm:</td>
-                                <td><input type="text" id="middlename" name="middlename" 
-                                           value="${m.middlenm}" ></td>
-                            </tr>
-                            <tr>
-                                <td>Status:</td>
-                                <td><input type="text" id="status" name="status" 
-                                           value="${m.status}" ></td>
-                            <tr>
-                            <tr>
-                                <td>Member Date:</td>
-                                <td><input type="text" id="memdt" name="memdt" 
-                                           value="${m.memdt}" ></td>
-                            </tr>
-                            <tr>
-                                <td>Password:</td>
-                                <td><input type="password" id="psswd" name="psswd" 
-                                           value="${m.password}" size="22"></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" value="Update Member data"></td>
-                            </tr>
-                            </table>
-                            -->
                         </form>
                     </div>
                     <div class="col-sm-6">
-   
-                    </div>
+                        <br>
+                        <br>
+                        <h1 class="text-primary text-center"><i class="fa fa-id-card-o fa-5x"></i></h1>
+                    </div
                 </div>
+                           
                 <div class="row">
                     <div class="col-sm-12 col-sm-offset-1">
-                        <br>
                         <br>
                         <h4>View Transaction History From</h4>
                         <form action="ShowPurchases" method="post" class="form-inline">
@@ -159,32 +120,17 @@
                     </div>
                 </div>
                 <br>
-                <hr>
-                <!--
-                <br>View Transaction History From:<br>
-                   <form action="ShowPurchases" method="post" >
-                       <table>
-                           <tr>
-                               <td>Month:</td><td><input type="text" name="month" 
-                                                         id="month" value=""></td>
-                               <td>Day:</td><td><input type="text" name="day" 
-                                                       id="day" value=""></td>
-                               <td>Year:</td><td><input type="text" name="year" 
-                                                        id="year" value=""></td>
-                           </tr>
-                       </table><br>
-                       <input  type="submit" value="View Transactions">
-                   </form> <br>
-                <br><br>
-                -->
+                </div>
+                <div>
+                    <br>
+                    <h5>
+                        <a href="/ClubDB_Arcelo">&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-circle-left"></i>&nbsp;Back to the Login Screen</a>
+                    </h5>
+                </div>              
             </div>
-                            
-            <a href="/ClubDB_Arcelo"><span class="glyphicon glyphicon-chevron-left"></span>Back to the Login Screen</a>
-             
-            <div>
+            <div class="alert alert-info" role="alert">
                 ${msg}
             </div>
-             
-           </body>
-       </c:if>
+        </body>
+    </c:if>
 </html>

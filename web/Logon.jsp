@@ -15,12 +15,12 @@
         <br>
         <br>
         <h2 class="text-center">Welcome to the Club - Please Logon</h2>
-        <h1 class="text-center"><i class="fa fa-user fa-3x"></i></h1>
+        <h1 class="text-center"><i class="fa fa-user-circle-o fa-3x"></i></h1>
         <form action="ClubLogon" method="post" class="form-horizontal col-sm-6 col-sm-offset-3">
             <br>
             <br>
             <div>
-                <p class="text-default">${msg}</p>
+                ${msg}
             </div>
             <br>
             <div class="form-group">
