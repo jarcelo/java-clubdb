@@ -15,6 +15,7 @@ public class ConnectionPool {
         try {
             InitialContext ic = new InitialContext();
             Context envCtx = (Context) ic.lookup("java:comp/env");
+            //TODO check if this has to be renamed
             dataSource = (DataSource) envCtx.lookup("jdbc/clubdb");
             
         } catch (NamingException e) {

@@ -4,6 +4,10 @@
         <servlet-name>ClubLogonServlet</servlet-name>
         <servlet-class>servlets.ClubLogonServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowPurchasesServlet</servlet-name>
+        <servlet-class>servlets.ShowPurchasesServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ClubLogonServlet</servlet-name>
         <url-pattern>/ClubLogon</url-pattern>
@@ -11,6 +15,10 @@
     <welcome-file-list>
         <welcome-file>Logon.jsp</welcome-file>
     </welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>ShowPurchasesServlet</servlet-name>
+        <url-pattern>/ShowPurchases</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
