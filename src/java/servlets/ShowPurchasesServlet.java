@@ -7,6 +7,7 @@ import business.Purchase;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,6 +40,7 @@ public class ShowPurchasesServlet extends HttpServlet
         response.setContentType("text/html;charset=UTF-8");
         String URL = "/MemberScreen.jsp";
         String sql = "", msg = "", mo = "", dy = "", yr ="";
+        String sqlBal = "";
         String sqlwhere = "";
         try {
             Member m = (Member) request.getSession().getAttribute("m");
@@ -78,6 +80,30 @@ public class ShowPurchasesServlet extends HttpServlet
             msg = "Total Records = " + r.getRow();
             URL = "/Purchases.jsp";
             request.setAttribute("pur", pur);
+            
+            //Credit
+            PreparedStatement credit = conn.prepareStatement( "SELECT SUM(p.Amount) " +
+                    " FROM tblPurchases p " +
+                    " WHERE p.TransType = 'C' " +
+                    " AND p.memid = '" + m.getMemid() + "'" +
+                    sqlwhere);
+            ResultSet creditTotal = credit.executeQuery();
+            creditTotal.next();
+            
+            // Debit 
+            PreparedStatement debit = conn.prepareStatement ( "SELECT SUM(p.Amount) " +
+                    " FROM tblPurchases p " +
+                    " WHERE p.TransType = 'D' " +
+                    " AND p.memid = '" + m.getMemid() + "'" +
+                    sqlwhere);
+            ResultSet debitTotal = debit.executeQuery();
+            debitTotal.next();
+            
+            double balance = Double.parseDouble(debitTotal.getString(1)) - Double.parseDouble(creditTotal.getString(1));
+            request.setAttribute("bal", balance);
+            
+            //URL = "/Purchases.jsp";
+            
         } catch (SQLException e) {
             msg = "SQL Exception: " + e.getMessage();
         } catch (Exception e) {

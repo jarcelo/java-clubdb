@@ -36,6 +36,7 @@
         </table>
         <div>
             <p>${msg}</p>
+            <p>Current Balance: ${bal}</p>
         </div>
         <a href="MemberScreen.jsp">Back to Member Screen</a>
     </body>
