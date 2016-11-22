@@ -7,6 +7,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,16 +47,19 @@ public class MemberUpdateServlet extends HttpServlet
         String dbUser = "root";
         String dbPwd = "uftbutefade1";
         
+        String validateName = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}";
+        String validateDateFormat = "([0-9]{4})-([0-9]{2})-([0-9]{2})";
+
         try {
             Member m = (Member) request.getSession().getAttribute("m");
             Member n = m;
             try {
                 lname = request.getParameter("lastname");
-                if (!lname.isEmpty()) {
+                if (!lname.isEmpty() && lname.matches(validateName)) {
                     n.setLastnm(lname);
                 }
                 else{
-                    msg += "Last name empty.<br>";
+                    msg += "Input error. Lastname is empty or has invalid characters.<br>";
                 }
             } catch (Exception e) {
                 msg += "Lastname error:" + e.getMessage() + "<br>"; 
@@ -60,11 +67,11 @@ public class MemberUpdateServlet extends HttpServlet
             
             try {
                 fname = request.getParameter("firstname");
-                if (!fname.isEmpty()) {
+                if (!fname.isEmpty() && fname.matches(validateName)) {
                     n.setFirstnm(fname);
                 }
                 else{
-                    msg += "First name empty.<br>";
+                    msg += "Input error. Firstname is empty or has invalid characters.<br>";
                 }
             } catch (Exception e) {
                 msg += "Firstname error:" + e.getMessage() + "<br>"; 
@@ -72,23 +79,23 @@ public class MemberUpdateServlet extends HttpServlet
              
             try {
                 mname = request.getParameter("middlename");
-                if (!mname.isEmpty()) {
+                if (!mname.isEmpty() && mname.matches(validateName)) {
                     n.setMiddlenm(mname);
                 }
                 else{
-                    msg += "Middle name empty.<br>";
+                    msg += "Input error. Middlename is empty or has invalid characters.<br>";
                 }
             } catch (Exception e) {
-                msg += "Middle name error:" + e.getMessage() + "<br>"; 
+                msg += "Middlename error:" + e.getMessage() + "<br>"; 
             }
             
             try {
                 status = request.getParameter("status");
-                if (!status.isEmpty()) {
+                if (!status.isEmpty() && status.matches(validateName)) {
                     n.setStatus(status);
                 }
                 else{
-                    msg += "Last name empty.<br>";
+                    msg += "Input error. Status is empty or has invalid characters.<br>";
                 }
             } catch (Exception e) {
                 msg += "Lastname error:" + e.getMessage() + "<br>"; 
@@ -96,12 +103,14 @@ public class MemberUpdateServlet extends HttpServlet
             
             try {
                 memdt = request.getParameter("memdt");
-                if (!memdt.isEmpty()) {
+                if (!memdt.isEmpty() && validateDate(memdt)) {
                     n.setMemdt(memdt);
                 }
                 else{
-                    msg += "Member date empty.<br>";
+                    msg += "Input error. Date is empty or does not match YYYY-MM-DD pattern.<br>";
                 }
+            } catch(ParseException e) {
+                msg += "Input error. Date is empty or does not match YYYY-MM-DD pattern.<br>";
             } catch (Exception e) {
                 msg += "Memberdate error:" + e.getMessage() + "<br>"; 
             }
@@ -144,7 +153,7 @@ public class MemberUpdateServlet extends HttpServlet
                 if (rc == 0) {
                     msg += "Update failed: no changes <br>.";
                 } else if (rc == 1) {
-                    msg += "Member Updated!<br>";
+                    msg += "Member profile successfully updated!<br>";
                     m = n;
                 } else {
                     msg += "Warning: " + rc + " records updated.<br>";
@@ -202,5 +211,17 @@ public class MemberUpdateServlet extends HttpServlet
     {
         return "Short description";
     }// </editor-fold>
+
+    private boolean validateDate(String memdt) throws ParseException
+    {
+        boolean valid = false;
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
+        dateFormatter.setLenient(false);
+        if (!memdt.isEmpty()) {
+            Date date = dateFormatter.parse(memdt);
+            valid = true;
+        }
+        return valid;
+    }
 
 }
