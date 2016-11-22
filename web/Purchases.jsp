@@ -15,7 +15,7 @@
     </head>
     <body class="container">
         <div class="panel panel-primary">
-            <div class="panel-heading"><h3><span class="glyphicon glyphicon-th text-right"></span>&nbsp;Member Purchases</h3></div>
+            <div class="panel-heading"><h3 class="text-center"><span class="glyphicon glyphicon-th text-right"></span>&nbsp;Member Purchases</h3></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-6">
@@ -31,19 +31,19 @@
             </div>
             <table class="table table-striped">
                 <tr>
-                    <th class="text-center">Purchase Date</th>
-                    <th class="text-center">Purchase Type</th>
-                    <th class="text-center">Trans Code</th>
-                    <th class="text-center">Trans. Description</th>
-                    <th class="text-center">Amount</th>
+                    <th class="text-left">Purchase Date</th>
+                    <th class="text-left">Purchase Type</th>
+                    <th class="text-left">Trans Code</th>
+                    <th class="text-left">Trans. Description</th>
+                    <th class="text-left">Amount</th>
                 </tr>
                 <c:forEach var="p" items="${pur}">
                     <tr>
-                        <td class="text-center">${p.purchdt}</td>
-                        <td class="text-center">${p.purchtype}</td>
-                        <td class="text-center">${p.transcd}</td>
-                        <td class="text-center">${p.transdesc}</td>
-                        <td class="text-center">${p.amt}</td>
+                        <td class="text-left">${p.purchdt}</td>
+                        <td class="text-left">${p.purchtype}</td>
+                        <td class="text-left">${p.transcd}</td>
+                        <td class="text-left">${p.transdesc}</td>
+                        <td class="text-left">${p.amt}</td>
                     </tr>
                 </c:forEach>
             </table>

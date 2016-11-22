@@ -73,7 +73,7 @@
                                 <label for="memdt" class="col-sm-4 control-label">Member Date</label>
                                 <div class="col-sm-8">
                                   <input class="form-control" type="text" id="memdt" name="memdt"
-                                           value="${m.memdt}">
+                                         value="${m.memdt}" placeholder="YYYY-MM-DD">
                                 </div>
                             </div>
                             <div class="form-group">
