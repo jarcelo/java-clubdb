@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,6 +43,7 @@ public class ShowPurchasesServlet extends HttpServlet
         String sql = "", msg = "", mo = "", dy = "", yr ="";
         String sqlBal = "";
         String sqlwhere = "";
+        NumberFormat curr = NumberFormat.getCurrencyInstance();
         try {
             Member m = (Member) request.getSession().getAttribute("m");
             mo = request.getParameter("month");
@@ -100,7 +102,8 @@ public class ShowPurchasesServlet extends HttpServlet
             debitTotal.next();
             
             double balance = Double.parseDouble(debitTotal.getString(1)) - Double.parseDouble(creditTotal.getString(1));
-            request.setAttribute("bal", balance);
+            //balance = curr.format(balanceAmt);
+            request.setAttribute("bal", curr.format(balance));
             
             //URL = "/Purchases.jsp";
             
