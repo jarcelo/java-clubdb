@@ -8,14 +8,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 public class ConnectionPool {
-    private static ConnectionPool pool = null;
+    private static ConnectionPool connectionPool = null;
     private static DataSource dataSource = null;
     
     private ConnectionPool() {
         try {
             InitialContext ic = new InitialContext();
             Context envCtx = (Context) ic.lookup("java:comp/env");
-            //TODO check if this has to be renamed
             dataSource = (DataSource) envCtx.lookup("jdbc/clubdb");
             
         } catch (NamingException e) {
@@ -24,10 +23,10 @@ public class ConnectionPool {
     }
     
     public static synchronized ConnectionPool getInstance() {
-        if (pool == null) {
-            pool = new ConnectionPool();
+        if (connectionPool == null) {
+            connectionPool = new ConnectionPool();
         }
-        return pool;
+        return connectionPool;
     }
     
     public Connection getConnection() {
