@@ -5,7 +5,6 @@ import business.ConnectionPool;
 import business.Member;
 import business.Purchase;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,49 +24,38 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ShowPurchasesServlet extends HttpServlet
 {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "/MemberScreen.jsp";
-        String sql = "", msg = "", mo = "", dy = "", yr ="";
-        String sqlBal = "";
-        String sqlwhere = "";
+        String query = "", msg = "", month = "", day = "", year ="";
+        String whereStatement = "";
         NumberFormat curr = NumberFormat.getCurrencyInstance();
         try {
             Member m = (Member) request.getSession().getAttribute("m");
-            mo = request.getParameter("month");
-            dy = request.getParameter("day");
-            yr = request.getParameter("year");
+            month = request.getParameter("month");
+            day = request.getParameter("day");
+            year = request.getParameter("year");
             
             ConnectionPool pool = ConnectionPool.getInstance();
             Connection conn = pool.getConnection();
             Statement s = conn.createStatement();
             
-            if (mo.isEmpty() || dy.isEmpty() || yr.isEmpty()) {
-                sqlwhere = "";
+            if (month.isEmpty() || day.isEmpty() || year.isEmpty()) {
+                whereStatement = "";
             } else {
-                sqlwhere = " AND p.purchasedt >= '" + yr + "-" + mo + "-" + dy + "' ";
+                whereStatement = " AND p.purchasedt >= '" + year + "-" + month + "-" + day + "' ";
             }
-            sql = "SELECT p.memID, p.PurchaseDt, p.TransType, " +
+            query = "SELECT p.memID, p.PurchaseDt, p.TransType, " +
                     " p.TransCd, c.TransDesc, p.Amount " +
                     " FROM tblPurchases p, tblCodes c " +
                     " WHERE p.transcd = c.transcd " +
-                    " AND p.memid = '" + m.getMemid() + "'" +
-                    sqlwhere + 
+                    " AND p.memid = '" + m.getMemberId() + "'" +
+                    whereStatement + 
                     " ORDER BY p.purchaseDt";
             
-            ResultSet r = s.executeQuery(sql);
+            ResultSet r = s.executeQuery(query);
             ArrayList<Purchase> pur = new ArrayList<>();
             while(r.next()){
                 Purchase p = new Purchase(
@@ -84,28 +72,27 @@ public class ShowPurchasesServlet extends HttpServlet
             request.setAttribute("pur", pur);
             
             //Credit
-            PreparedStatement credit = conn.prepareStatement( "SELECT SUM(p.Amount) " +
+            PreparedStatement credit = conn.prepareStatement("SELECT SUM(p.Amount) " +
                     " FROM tblPurchases p " +
                     " WHERE p.TransType = 'C' " +
-                    " AND p.memid = '" + m.getMemid() + "'" +
-                    sqlwhere);
+                    " AND p.memid = '" + m.getMemberId() + "'" +
+                    whereStatement);
             ResultSet creditTotal = credit.executeQuery();
             creditTotal.next();
             
             // Debit 
-            PreparedStatement debit = conn.prepareStatement ( "SELECT SUM(p.Amount) " +
+            PreparedStatement debit = conn.prepareStatement ("SELECT SUM(p.Amount) " +
                     " FROM tblPurchases p " +
                     " WHERE p.TransType = 'D' " +
-                    " AND p.memid = '" + m.getMemid() + "'" +
-                    sqlwhere);
+                    " AND p.memid = '" + m.getMemberId() + "'" +
+                    whereStatement);
             ResultSet debitTotal = debit.executeQuery();
             debitTotal.next();
             
-            double balance = Double.parseDouble(debitTotal.getString(1)) - Double.parseDouble(creditTotal.getString(1));
-            //balance = curr.format(balanceAmt);
-            request.setAttribute("bal", curr.format(balance));
+            double balance = Double.parseDouble(debitTotal.getString(1)) - 
+                                Double.parseDouble(creditTotal.getString(1));
             
-            //URL = "/Purchases.jsp";
+            request.setAttribute("bal", curr.format(balance));
             
         } catch (SQLException e) {
             msg = "SQL Exception: " + e.getMessage();

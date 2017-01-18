@@ -7,60 +7,60 @@ package business;
  */
 public class Member
 {
-    private String memid, lastnm, firstnm, middlenm;
-    private String status, memdt;
-    private long password, passattempt;
+    private String memberId, lastName, firstName, middleName;
+    private String status, membershipDate;
+    private long password, passwordAttempt;
 
     public Member()
     {
-        memid = "";
-        lastnm = "";
-        firstnm = "";
-        middlenm = "";
+        memberId = "";
+        lastName = "";
+        firstName = "";
+        middleName = "";
         status = "";
-        memdt = "";
+        membershipDate = "";
         password = 0;
-        passattempt = -1;
+        passwordAttempt = -1;
     }
 
-    public String getMemid()
+    public String getMemberId()
     {
-        return memid;
+        return memberId;
     }
 
-    public void setMemid(String memid)
+    public void setMemberId(String memberId)
     {
-        this.memid = memid;
+        this.memberId = memberId;
     }
 
-    public String getLastnm()
+    public String getLastName()
     {
-        return lastnm;
+        return lastName;
     }
 
-    public void setLastnm(String lastnm)
+    public void setLastName(String lastName)
     {
-        this.lastnm = lastnm;
+        this.lastName = lastName;
     }
 
-    public String getFirstnm()
+    public String getFirstName()
     {
-        return firstnm;
+        return firstName;
     }
 
-    public void setFirstnm(String firstnm)
+    public void setFirstName(String firstName)
     {
-        this.firstnm = firstnm;
+        this.firstName = firstName;
     }
 
-    public String getMiddlenm()
+    public String getMiddleName()
     {
-        return middlenm;
+        return middleName;
     }
 
-    public void setMiddlenm(String middlenm)
+    public void setMiddleName(String middleName)
     {
-        this.middlenm = middlenm;
+        this.middleName = middleName;
     }
 
     public String getStatus()
@@ -73,14 +73,14 @@ public class Member
         this.status = status;
     }
 
-    public String getMemdt()
+    public String getMembershipDate()
     {
-        return memdt;
+        return membershipDate;
     }
 
-    public void setMemdt(String memdt)
+    public void setMembershipDate(String membershipDate)
     {
-        this.memdt = memdt;
+        this.membershipDate = membershipDate;
     }
 
     public long getPassword()
@@ -93,19 +93,19 @@ public class Member
         this.password = password;
     }
 
-    public long getPassattempt()
+    public long getPasswordAttempt()
     {
-        return passattempt;
+        return passwordAttempt;
     }
 
-    public void setPassattempt(long passattempt)
+    public void setPasswordAttempt(long passwordAttempt)
     {
-        this.passattempt = passattempt;
+        this.passwordAttempt = passwordAttempt;
     }
     
     public boolean isAuthenticated() {
         if (password > 0) {
-            if (password == this.passattempt) {
+            if (password == this.passwordAttempt) {
                 return true;
             }
         }

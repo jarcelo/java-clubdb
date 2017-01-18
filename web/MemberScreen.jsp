@@ -35,31 +35,31 @@
                     <div class="col-sm-6">
                         <form id="memupdate" action="MemberUpdate" method="post" class="form-horizontal">
                             <div class="form-group">
-                                <label for="memid" class="col-sm-4 control-label">Member ID</label>
+                                <label for="memberId" class="col-sm-4 control-label">Member ID</label>
                                 <div class="col-sm-8">
-                                  <input class="form-control" type="text" id="memid" name="memid"
-                                           value="${m.memid}" readonly="true">
+                                  <input class="form-control" type="text" id="memberId" name="memberId"
+                                           value="${m.memberId}" readonly="true">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="lastname" class="col-sm-4 control-label">Last Name</label>
+                                <label for="lastName" class="col-sm-4 control-label">Last Name</label>
                                 <div class="col-sm-8">
-                                  <input class="form-control" type="text" id="lastname" name="lastname"
-                                           value="${m.lastnm}">
+                                  <input class="form-control" type="text" id="lastName" name="lastName"
+                                           value="${m.lastName}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="firstname" class="col-sm-4 control-label">First Name</label>
+                                <label for="firstName" class="col-sm-4 control-label">First Name</label>
                                 <div class="col-sm-8">
-                                  <input class="form-control" type="text" id="firstname" name="firstname"
-                                           value="${m.firstnm}">
+                                  <input class="form-control" type="text" id="firstName" name="firstName"
+                                           value="${m.firstName}">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="middlename" class="col-sm-4 control-label">Middle Name</label>
+                                <label for="middleName" class="col-sm-4 control-label">Middle Name</label>
                                 <div class="col-sm-8">
-                                  <input class="form-control" type="text" id="middlename" name="middlename"
-                                           value="${m.middlenm}">
+                                  <input class="form-control" type="text" id="middleName" name="middleName"
+                                           value="${m.middleName}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -70,16 +70,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="memdt" class="col-sm-4 control-label">Member Date</label>
+                                <label for="membershipDate" class="col-sm-4 control-label">Member Date</label>
                                 <div class="col-sm-8">
-                                  <input class="form-control" type="text" id="memdt" name="memdt"
-                                         value="${m.memdt}" placeholder="YYYY-MM-DD">
+                                  <input class="form-control" type="text" id="membershipDate" name="membershipDate"
+                                         value="${m.membershipDate}" placeholder="YYYY-MM-DD">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="psswd" class="col-sm-4 control-label">Password</label>
+                                <label for="password" class="col-sm-4 control-label">Password</label>
                                 <div class="col-sm-8">
-                                  <input class="form-control" type="password" id="psswd" name="psswd"
+                                  <input class="form-control" type="password" id="psswd" name="password"
                                            value="${m.password}">
                                 </div>
                             </div>
