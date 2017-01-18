@@ -25,22 +25,12 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "MemberUpdateServlet", urlPatterns = {"/MemberUpdate"})
 public class MemberUpdateServlet extends HttpServlet
 {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
         response.setContentType("text/html;charset=UTF-8");
-        String sql, msg = "", URL = "/MemberScreen.jsp";
-        String lname = "", fname = "", mname = "", status ="", memdt="";
+        String query, msg = "", URL = "/MemberScreen.jsp";
+        String lastName = "", firstName = "", middleName = "", status ="", membershipDate="";
         long newPassword = 0;
         
         String dbURL = "jdbc:mysql://localhost:3306/club";
@@ -54,9 +44,9 @@ public class MemberUpdateServlet extends HttpServlet
             Member m = (Member) request.getSession().getAttribute("m");
             Member n = m;
             try {
-                lname = request.getParameter("lastname");
-                if (!lname.isEmpty() && lname.matches(validateName)) {
-                    n.setLastnm(lname);
+                lastName = request.getParameter("lastName");
+                if (!lastName.isEmpty() && lastName.matches(validateName)) {
+                    n.setLastName(lastName);
                 }
                 else{
                     msg += "Input error. Lastname is empty or has invalid characters.<br>";
@@ -66,9 +56,9 @@ public class MemberUpdateServlet extends HttpServlet
             }
             
             try {
-                fname = request.getParameter("firstname");
-                if (!fname.isEmpty() && fname.matches(validateName)) {
-                    n.setFirstnm(fname);
+                firstName = request.getParameter("firstName");
+                if (!firstName.isEmpty() && firstName.matches(validateName)) {
+                    n.setFirstName(firstName);
                 }
                 else{
                     msg += "Input error. Firstname is empty or has invalid characters.<br>";
@@ -78,9 +68,9 @@ public class MemberUpdateServlet extends HttpServlet
             }
              
             try {
-                mname = request.getParameter("middlename");
-                if (!mname.isEmpty() && mname.matches(validateName)) {
-                    n.setMiddlenm(mname);
+                middleName = request.getParameter("middleName");
+                if (!middleName.isEmpty() && middleName.matches(validateName)) {
+                    n.setMiddleName(middleName);
                 }
                 else{
                     msg += "Input error. Middlename is empty or has invalid characters.<br>";
@@ -102,9 +92,9 @@ public class MemberUpdateServlet extends HttpServlet
             }
             
             try {
-                memdt = request.getParameter("memdt");
-                if (!memdt.isEmpty() && validateDate(memdt)) {
-                    n.setMemdt(memdt);
+                membershipDate = request.getParameter("membershipDate");
+                if (!membershipDate.isEmpty() && validateDate(membershipDate)) {
+                    n.setMembershipDate(membershipDate);
                 }
                 else{
                     msg += "Input error. Date is empty or does not match YYYY-MM-DD pattern.<br>";
@@ -112,12 +102,12 @@ public class MemberUpdateServlet extends HttpServlet
             } catch(ParseException e) {
                 msg += "Input error. Date is empty or does not match YYYY-MM-DD pattern.<br>";
             } catch (Exception e) {
-                msg += "Memberdate error:" + e.getMessage() + "<br>"; 
+                msg += "Membership Date error:" + e.getMessage() + "<br>"; 
             }
             
             try {
                 newPassword = 
-                        Long.parseLong(request.getParameter("psswd"));
+                        Long.parseLong(request.getParameter("password"));
                 if (newPassword > 0) {
                     n.setPassword(newPassword);
                 } else {
@@ -128,10 +118,9 @@ public class MemberUpdateServlet extends HttpServlet
             }
             
             if (msg.isEmpty()) {
-                //update database
                 Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPwd);
-                //prepared statement to prevent sql injection attacks
-                sql = "UPDATE tblmembers SET " +
+                // Prepared statement to prevent sql injection attacks
+                query = "UPDATE tblmembers SET " +
                         " LastName = ?, " +
                         " FirstName = ?," +
                         " MiddleName = ?, " +
@@ -140,14 +129,14 @@ public class MemberUpdateServlet extends HttpServlet
                         " Password = ? " +
                         " WHERE MemID = ? ";
                 
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, n.getLastnm());
-                ps.setString(2, n.getFirstnm());
-                ps.setString(3, n.getMiddlenm());
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setString(1, n.getLastName());
+                ps.setString(2, n.getFirstName());
+                ps.setString(3, n.getMiddleName());
                 ps.setString(4, n.getStatus());
-                ps.setString(5, n.getMemdt());
+                ps.setString(5, n.getMembershipDate());
                 ps.setLong(6, n.getPassword());
-                ps.setString(7, n.getMemid());
+                ps.setString(7, n.getMemberId());
                 
                 int rc = ps.executeUpdate();
                 if (rc == 0) {

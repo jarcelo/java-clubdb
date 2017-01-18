@@ -9,75 +9,76 @@ import java.text.NumberFormat;
  */
 public class Purchase
 {
-    private String purchdt, purchtype, transcd, transdesc;
-    private double amt;
-    private NumberFormat curr = NumberFormat.getCurrencyInstance();
+    private String purchaseDate, purchaseType, transactionCode, transactionDescription;
+    private double amount;
+    private NumberFormat currency = NumberFormat.getCurrencyInstance();
     
     public Purchase(){
-        this.purchdt= "";
-        this.purchtype = "";
-        this.transcd = "";
-        this.transdesc = "";
-        this.amt = 0;
+        purchaseDate= "";
+        purchaseType = "";
+        transactionCode = "";
+        transactionDescription = "";
+        amount = 0;
     }
 
-    public Purchase(String purchdt, String purchtype, String transcd, String transdesc, double amt)
+    public Purchase(String purchaseDate, String purchaseType, String transactionCode, 
+            String transactionDescription, double amount)
     {
-        this.purchdt = purchdt;
-        this.purchtype = purchtype;
-        this.transcd = transcd;
-        this.transdesc = transdesc;
-        this.amt = amt;
+        this.purchaseDate = purchaseDate;
+        this.purchaseType = purchaseType;
+        this.transactionCode = transactionCode;
+        this.transactionDescription = transactionDescription;
+        this.amount = amount;
     }
 
-    public String getPurchdt()
+    public String getPurchaseDate()
     {
-        return purchdt;
+        return purchaseDate;
     }
 
-    public void setPurchdt(String purchdt)
+    public void setPurchaseDate(String purchaseDate)
     {
-        this.purchdt = purchdt;
+        this.purchaseDate = purchaseDate;
     }
 
-    public String getPurchtype()
+    public String getPurchaseType()
     {
-        return purchtype;
+        return purchaseType;
     }
 
-    public void setPurchtype(String purchtype)
+    public void setPurchaseType(String purchaseType)
     {
-        this.purchtype = purchtype;
+        this.purchaseType = purchaseType;
     }
 
-    public String getTranscd()
+    public String getTransactionCode()
     {
-        return transcd;
+        return transactionCode;
     }
 
-    public void setTranscd(String transcd)
+    public void setTransactionCode(String transactionCode)
     {
-        this.transcd = transcd;
+        this.transactionCode = transactionCode;
     }
 
-    public String getTransdesc()
+    public String getTransactionDescription()
     {
-        return transdesc;
+        return transactionDescription;
     }
 
-    public void setTransdesc(String transdesc)
+    public void setTransactionDescription(String transactionDescription)
     {
-        this.transdesc = transdesc;
+        this.transactionDescription = transactionDescription;
     }
 
-    public String getAmt()
+    public String getAmount()
     {
-        return curr.format(this.amt);
+        return currency.format(this.amount);
     }
 
-    public void setAmt(double amt)
+    public void setAmount(double amount)
     {
-        this.amt = amt;
+        this.amount = amount;
     }
     
 }

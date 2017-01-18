@@ -45,15 +45,15 @@ public class ClubLogonServlet extends HttpServlet
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
                 member = new Member();
-                member.setMemid(userid);
+                member.setMemberId(userid);
                 member.setPassword(resultSet.getLong("Password"));
-                member.setPassattempt(passattempt);
+                member.setPasswordAttempt(passattempt);
                 if (member.isAuthenticated()) {
-                    member.setLastnm(resultSet.getString("LastName"));
-                    member.setFirstnm(resultSet.getString("FirstName"));
-                    member.setMiddlenm(resultSet.getString("MiddleName"));
+                    member.setLastName(resultSet.getString("LastName"));
+                    member.setFirstName(resultSet.getString("FirstName"));
+                    member.setMiddleName(resultSet.getString("MiddleName"));
                     member.setStatus(resultSet.getString("status"));
-                    member.setMemdt(resultSet.getString("MemDt"));
+                    member.setMembershipDate(resultSet.getString("MemDt"));
                     URL = "/MemberScreen.jsp";
                     msg = "Member successfully authenticated! <br>";
                 } else {
